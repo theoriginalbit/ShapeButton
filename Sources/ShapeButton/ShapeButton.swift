@@ -68,7 +68,7 @@ public class ShapeButton: UIButton {
     /// - Parameters:
     ///   - color:  The background color for the button.
     ///   - state:  The state the color should display under. follows the same rules as `setBackgroundImage(_:for:)`.
-    public func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
+    @objc public dynamic func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         setBackgroundImage(color?.image(), for: state)
     }
 
