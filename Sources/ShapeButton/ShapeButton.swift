@@ -3,7 +3,7 @@ import UIKit
 
 /// An extension of `UIButton` that provides functionality to easily change the background color based on state in a similar fashion to
 /// `setTitleColor(_:for:)`. It also provides corner radius and curve (iOS 13+) setting via the initializers.
-class ShapeButton: UIButton {
+public class ShapeButton: UIButton {
     private var backwardCompatLayerMask: CAShapeLayer?
 
     public override var bounds: CGRect {
