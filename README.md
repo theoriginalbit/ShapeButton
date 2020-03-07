@@ -12,7 +12,7 @@ The API is the same as with setting anything else that is state aware. The below
 import ShapeButton
 
 // …
-let myButton = ShapeButton(continuousCornerRadius: ShapeButton.cornerRadiusUseSystem)
+let myButton = ShapeButton(continuousCornerRadius: ShapeButton.cornerRadiusUseStandard)
 myButton.setBackgroundColor(.systemBlue, for: .normal)
 myButton.setTitleColor(.white, for: .normal)
 
