@@ -1,9 +1,10 @@
 import os.log
 import UIKit
 
-/// An extension of `UIButton` that provides functionality to easily change the background color based on state in a similar fashion to
-/// `setTitleColor(_:for:)`. It also provides corner radius and curve (iOS 13+) setting via the initializers.
+/// An extension of `UIButton` that provides functionality to easily change the background color based on state in a similar fashion to `setTitleColor(_:for:)`.
 public class ShapeButton: UIButton {
+    public static let cornerRadiusUseSystem: CGFloat = 8
+
     private var backwardCompatLayerMask: CAShapeLayer?
 
     public override var bounds: CGRect {
@@ -16,46 +17,31 @@ public class ShapeButton: UIButton {
     ///
     /// - Parameters:
     ///   - frame:          The frame of the button. Defaults to `.zero`
-    ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners. Defaults to `8`.
-    public init(frame: CGRect = .zero, cornerRadius: CGFloat = 8) {
+    ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners.
+    public init(frame: CGRect = .zero, cornerRadius: CGFloat) {
         super.init(frame: frame)
-
-        if #available(iOS 13, *) {
-            os_log(.error, log: .default, "Prefer usage of init(frame:cornerRadius:cornerCurve:) on iOS 13")
-        }
 
         layer.cornerRadius = cornerRadius
         setBackgroundColor(backgroundColor, for: .normal)
     }
 
-    /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius`. The corners
-    /// will be continuous and implemented through a `CAShapeLayer` masking the button that resizes on `bound`s update.
+    /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius`. The corners will be continuous and implemented through a `CAShapeLayer` masking the button that resizes on `bound`s update.
     ///
     /// - Parameters:
     ///   - frame:          The frame of the button. Defaults to `.zero`
-    ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners. Defaults to `8`.
-    public convenience init(frame: CGRect = .zero, continuousCornerRadius cornerRadius: CGFloat = 8) {
+    ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners.
+    public init(frame: CGRect = .zero, continuousCornerRadius cornerRadius: CGFloat) {
         self.init(frame: frame, cornerRadius: cornerRadius)
 
-        // A continuous corner was requested, create a masking shape layer that will do this pre-iOS 13
-        backwardCompatLayerMask = CAShapeLayer()
-        layer.mask = backwardCompatLayerMask
-        updateCornerRadius()
-    }
-
-    /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius` and
-    /// corner curve using `layer.cornerCurve`.
-    ///
-    /// - Parameters:
-    ///   - frame:          The frame of the button. Defaults to `.zero`
-    ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners. Defaults to `8`.
-    ///   - cornerCurve:    The curve used for rendering the rounded corners of the layer. Defaults to `.continuous`.
-    @available(iOS 13.0, *)
-    public init(frame: CGRect = .zero, cornerRadius: CGFloat = 8, cornerCurve: CALayerCornerCurve = .continuous) {
-        super.init(frame: frame)
-
         layer.cornerRadius = cornerRadius
-        layer.cornerCurve = cornerCurve
+        if #available(iOS 13, *) {
+            layer.cornerCurve = .continuous
+        } else {
+            // Create a masking shape that will do continuous corners pre-iOS 13
+            backwardCompatLayerMask = CAShapeLayer()
+            layer.mask = backwardCompatLayerMask
+            updateCornerRadius()
+        }
         setBackgroundColor(backgroundColor, for: .normal)
     }
 
