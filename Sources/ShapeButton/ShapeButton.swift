@@ -42,6 +42,7 @@ public class ShapeButton: UIButton {
         layer.cornerRadius = cornerRadius
         if #available(iOS 13, *) {
             layer.cornerCurve = .continuous
+            layer.masksToBounds = true
         } else {
             // Create a masking shape that will do continuous corners pre-iOS 13
             backwardCompatLayerMask = CAShapeLayer()
