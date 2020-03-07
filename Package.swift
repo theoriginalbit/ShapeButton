@@ -3,14 +3,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "UIButton+setBackgroundColor",
+    name: "ShapeButton",
     platforms: [
         .iOS(.v10),
     ],
     products: [
-        .library(name: "UIButton+setBackgroundColor", targets: ["UIButton+setBackgroundColor"]),
+        .library(name: "ShapeButton", targets: ["ShapeButton"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "UIButton+setBackgroundColor"),
+        .target(name: "ShapeButton"),
     ])
