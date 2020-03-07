@@ -13,6 +13,12 @@ public class ShapeButton: UIButton {
         }
     }
 
+    public override var backgroundColor: UIColor? {
+        didSet {
+            setBackgroundImage(backgroundColor?.image(), for: .normal)
+        }
+    }
+
     /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius`.
     ///
     /// - Parameters:
