@@ -31,7 +31,7 @@ public class ShapeButton: UIButton {
     ///   - frame:          The frame of the button. Defaults to `.zero`
     ///   - cornerRadius:   When positive, the background of the layer will be drawn with rounded corners.
     public init(frame: CGRect = .zero, continuousCornerRadius cornerRadius: CGFloat) {
-        self.init(frame: frame, cornerRadius: cornerRadius)
+        super.init(frame: frame)
 
         layer.cornerRadius = cornerRadius
         if #available(iOS 13, *) {
