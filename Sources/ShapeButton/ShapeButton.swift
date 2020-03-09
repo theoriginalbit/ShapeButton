@@ -30,7 +30,7 @@ open class ShapeButton: UIButton {
         setBackgroundColor(backgroundColor, for: .normal)
     }
 
-    /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius`. The corners will be continuous and implemented through a `CAShapeLayer` masking the button that resizes on `bound`s update.
+    /// Initializes and returns a newly allocated button with the specified corner radius using `layer.cornerRadius`. The corners will be continuous using `layer.cornerCurve` and pre-iOS 13 are implemented through a `CAShapeLayer` masking the button that resizes on `bound`s update.
     ///
     /// - Parameters:
     ///   - frame:          The frame of the button. Defaults to `.zero`
