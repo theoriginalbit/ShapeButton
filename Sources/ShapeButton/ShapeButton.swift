@@ -1,19 +1,18 @@
-import os.log
 import UIKit
 
 /// An extension of `UIButton` that provides functionality to easily change the background color based on state in a similar fashion to `setTitleColor(_:for:)`.
-public class ShapeButton: UIButton {
+open class ShapeButton: UIButton {
     public static let cornerRadiusUseStandard: CGFloat = 8
 
     private var backwardCompatLayerMask: CAShapeLayer?
 
-    public override var bounds: CGRect {
+    open override var bounds: CGRect {
         didSet {
             updateCornerRadius()
         }
     }
 
-    public override var backgroundColor: UIColor? {
+    open override var backgroundColor: UIColor? {
         didSet {
             setBackgroundImage(backgroundColor?.image(), for: .normal)
         }
@@ -61,7 +60,7 @@ public class ShapeButton: UIButton {
     /// - Parameters:
     ///   - color:  The background color for the button.
     ///   - state:  The state the color should display under. follows the same rules as `setBackgroundImage(_:for:)`.
-    @objc public dynamic func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
+    @objc open dynamic func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         setBackgroundImage(color?.image(), for: state)
     }
 
